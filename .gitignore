@@ -1,0 +1,19 @@
+# Зависимости и кеши
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Сборка публикации (создаётся в CI)
+_site/
+
+# Секреты и локальные файлы
+.env
+.env.*
+*.log
+
+# IDE и ОС
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

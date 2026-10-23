@@ -1,0 +1,174 @@
+/* Дизайн-токены FlowGuard. Цвета данных и статусов — проверенная палитра
+   (категориальная, статусная, нейтральные поверхности) для светлой и тёмной темы. */
+
+:root {
+  color-scheme: light;
+  --font-sans: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --page: #f2f1ec;
+  --surface: #fcfcfb;
+  --surface-2: #f4f3ef;
+  --surface-3: #e9e8e2;
+  --line: #e1e0d9;
+  --line-strong: #c3c2b7;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --ink-3: #6b6a65;
+  --grid: #e8e7e1;
+  --axis: #c3c2b7;
+
+  --accent: #2a78d6;
+  --accent-fill: #256abf;
+  --accent-fill-hover: #1c5cab;
+  --accent-ink: #1c5cab;
+  --accent-wash: rgba(42, 120, 214, 0.1);
+  --on-accent: #ffffff;
+  --focus: #2a78d6;
+
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #6250d6;
+  --series-8: #e34948;
+
+  --good: #0ca30c;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --good-ink: #006300;
+  --critical-ink: #b42828;
+  --good-wash: rgba(12, 163, 12, 0.1);
+  --warning-wash: rgba(250, 178, 25, 0.16);
+  --serious-wash: rgba(236, 131, 90, 0.16);
+  --critical-wash: rgba(208, 59, 59, 0.12);
+
+  --shadow-1: 0 1px 2px rgba(11, 11, 11, 0.04), 0 1px 1px rgba(11, 11, 11, 0.03);
+  --shadow-2: 0 10px 30px -12px rgba(11, 11, 11, 0.18), 0 2px 6px rgba(11, 11, 11, 0.05);
+  --overlay: rgba(11, 11, 11, 0.42);
+
+  --r-1: 4px;
+  --r-2: 6px;
+  --r-3: 10px;
+  --r-pill: 999px;
+
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 72px;
+
+  --t-xs: 11.5px;
+  --t-sm: 13px;
+  --t-md: 15px;
+  --t-lg: 17px;
+  --t-xl: 22px;
+  --t-2xl: clamp(26px, 2.2vw + 14px, 34px);
+  --t-3xl: clamp(32px, 4vw + 12px, 58px);
+
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+  --dur-4: 600ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --sidebar: 252px;
+  --content-max: 1320px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --surface-2: #20201f;
+    --surface-3: #2a2a28;
+    --line: #2c2c2a;
+    --line-strong: #44443f;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --ink-3: #9a9890;
+    --grid: #262624;
+    --axis: #44443f;
+    --accent: #3987e5;
+    --accent-ink: #6da7ec;
+    --accent-wash: rgba(57, 135, 229, 0.16);
+    --focus: #6da7ec;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #008300;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+    --good-ink: #0ca30c;
+    --critical-ink: #ef7a7a;
+    --good-wash: rgba(12, 163, 12, 0.16);
+    --warning-wash: rgba(250, 178, 25, 0.14);
+    --serious-wash: rgba(236, 131, 90, 0.16);
+    --critical-wash: rgba(208, 59, 59, 0.2);
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-2: 0 18px 40px -16px rgba(0, 0, 0, 0.7), 0 2px 6px rgba(0, 0, 0, 0.4);
+    --overlay: rgba(0, 0, 0, 0.6);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --surface-2: #20201f;
+  --surface-3: #2a2a28;
+  --line: #2c2c2a;
+  --line-strong: #44443f;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --ink-3: #9a9890;
+  --grid: #262624;
+  --axis: #44443f;
+  --accent: #3987e5;
+  --accent-ink: #6da7ec;
+  --accent-wash: rgba(57, 135, 229, 0.16);
+  --focus: #6da7ec;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+  --good-ink: #0ca30c;
+  --critical-ink: #ef7a7a;
+  --good-wash: rgba(12, 163, 12, 0.16);
+  --warning-wash: rgba(250, 178, 25, 0.14);
+  --serious-wash: rgba(236, 131, 90, 0.16);
+  --critical-wash: rgba(208, 59, 59, 0.2);
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 18px 40px -16px rgba(0, 0, 0, 0.7), 0 2px 6px rgba(0, 0, 0, 0.4);
+  --overlay: rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) {
+    --dur-1: 1ms;
+    --dur-2: 1ms;
+    --dur-3: 1ms;
+    --dur-4: 1ms;
+  }
+}
+
+:root[data-motion="reduce"] {
+  --dur-1: 1ms;
+  --dur-2: 1ms;
+  --dur-3: 1ms;
+  --dur-4: 1ms;
+}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>FlowGuard — раннее выявление рисков по аномалиям сетевого трафика</title>
+    <meta
+      name="description"
+      content="FlowGuard — модель раннего выявления рисков кибербезопасности по аномалиям сетевого трафика: анализ PCAP/CSV/JSON в браузере, мониторинг, оценка качества и объяснимые инциденты."
+    />
+    <meta name="theme-color" content="#f2f1ec" />
+    <meta property="og:title" content="FlowGuard — раннее выявление рисков" />
+    <meta property="og:description" content="Обнаружение аномалий сетевого трафика: EWMA, CUSUM, Isolation Forest и поведенческие сигнатуры. Всё работает локально в браузере." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Onest:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <link rel="stylesheet" href="assets/css/print.css" />
+    <script src="assets/js/boot.js"></script>
+    <script type="module" src="assets/js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Перейти к содержимому</a>
+    <div class="app">
+      <aside class="sidebar" id="sidebar" aria-label="Основная навигация">
+        <a class="brand" href="#/" aria-label="FlowGuard — на главную">
+          <span class="brand-mark" data-icon="logo" data-size="22"></span>
+          <span><span class="brand-name">FlowGuard</span><span class="brand-sub">Ранние сигналы риска</span></span>
+        </a>
+        <nav class="nav" aria-label="Разделы">
+          <span class="nav-label">Работа</span>
+          <a class="nav-link" href="#/" data-route="/"><span data-icon="home"></span>Обзор</a>
+          <a class="nav-link" href="#/analyze" data-route="/analyze"><span data-icon="file"></span>Анализ файла</a>
+          <a class="nav-link" href="#/monitor" data-route="/monitor"><span data-icon="pulse"></span>Мониторинг<span class="nav-badge" data-live-badge hidden><span class="live-dot is-live"></span>в эфире</span></a>
+          <a class="nav-link" href="#/reports" data-route="/reports"><span data-icon="reports"></span>Отчёты</a>
+          <span class="nav-label">Модель</span>
+          <a class="nav-link" href="#/lab" data-route="/lab"><span data-icon="flask"></span>Оценка модели</a>
+          <a class="nav-link" href="#/method" data-route="/method"><span data-icon="book"></span>Методология</a>
+          <a class="nav-link" href="#/settings" data-route="/settings"><span data-icon="sliders"></span>Настройки</a>
+        </nav>
+        <div class="sidebar-foot">
+          <strong>Данные не покидают устройство</strong>
+          <span>Разбор файлов, модель и отчёты работают в браузере. Сервер не используется.</span>
+        </div>
+      </aside>
+      <div class="drawer-backdrop" data-backdrop hidden></div>
+      <div class="main-col">
+        <header class="topbar">
+          <button class="btn btn-ghost btn-icon menu-toggle" type="button" data-menu aria-controls="sidebar" aria-expanded="false" aria-label="Открыть меню">
+            <span data-icon="menu"></span>
+          </button>
+          <div class="crumbs"><span>FlowGuard</span><span aria-hidden="true">/</span><strong data-crumb>Обзор</strong></div>
+          <div class="topbar-actions">
+            <a class="state-pill" href="#/monitor" data-live-pill hidden><span class="live-dot is-live"></span><span data-live-text>Мониторинг</span></a>
+            <button class="btn btn-ghost btn-icon" type="button" data-theme-toggle aria-label="Тема оформления"><span data-icon="auto"></span></button>
+          </div>
+        </header>
+        <main id="main" tabindex="-1">
+          <div id="view" class="view">
+            <noscript>
+              <div class="callout callout-error">
+                <div>
+                  <strong>Нужен JavaScript.</strong> FlowGuard выполняет анализ трафика прямо в браузере, поэтому без JavaScript приложение не работает.
+                </div>
+              </div>
+            </noscript>
+          </div>
+        </main>
+        <footer class="site-footer">
+          <span>FlowGuard 2.0 — модель раннего выявления рисков путём обнаружения аномалий сетевого трафика</span>
+          <span><a href="https://github.com/Carpiration/flowguard-ews" rel="noopener">Исходный код</a> · <a href="#/method">Методология</a></span>
+        </footer>
+      </div>
+    </div>
+    <div id="toasts" class="toasts" aria-live="polite"></div>
+  </body>
+</html>

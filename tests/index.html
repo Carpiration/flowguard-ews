@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FlowGuard — тесты</title>
+    <style>
+      :root { color-scheme: light dark; font: 14px/1.5 system-ui, sans-serif; }
+      body { margin: 24px; background: Canvas; color: CanvasText; }
+      h1 { font-size: 20px; }
+      li { margin: 2px 0; font-family: ui-monospace, Consolas, monospace; }
+      .ok { color: #0a7d0a; }
+      .fail { color: #c22; }
+      pre { white-space: pre-wrap; margin: 4px 0 8px 16px; }
+    </style>
+  </head>
+  <body>
+    <h1>Тесты ядра FlowGuard</h1>
+    <p id="summary" role="status">Выполняются…</p>
+    <ol id="list"></ol>
+    <script type="module">
+      import { runAll } from './harness.js';
+      import './core.test.js';
+      import './samples.test.js';
+      const list = document.getElementById('list');
+      const results = await runAll((r) => {
+        const li = document.createElement('li');
+        li.className = r.ok ? 'ok' : 'fail';
+        li.textContent = `${r.ok ? '✓' : '✗'} [${r.file}] ${r.name} — ${r.ms.toFixed(0)} мс`;
+        if (!r.ok) {
+          const pre = document.createElement('pre');
+          pre.textContent = r.error.stack || r.error.message;
+          li.append(pre);
+        }
+        list.append(li);
+      });
+      const failed = results.filter((r) => !r.ok).length;
+      document.getElementById('summary').textContent = failed ? `Провалено: ${failed} из ${results.length}` : `Все тесты пройдены: ${results.length}`;
+      window.__testResults = { total: results.length, failed, failures: results.filter((r) => !r.ok).map((r) => `${r.name}: ${r.error.message}`) };
+    </script>
+  </body>
+</html>

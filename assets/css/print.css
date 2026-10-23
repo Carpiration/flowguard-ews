@@ -1,0 +1,85 @@
+/* Печать и сохранение отчёта в PDF через диалог печати браузера. */
+
+@page {
+  size: A4;
+  margin: 14mm 12mm;
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+    --page: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #f6f6f4;
+    --surface-3: #ececea;
+    --line: #d9d8d2;
+    --ink: #000000;
+    --ink-2: #333333;
+    --ink-3: #555555;
+    --shadow-1: none;
+    --shadow-2: none;
+  }
+
+  body {
+    background: #ffffff;
+    font-size: 11pt;
+  }
+
+  .sidebar,
+  .topbar,
+  .toasts,
+  .skip-link,
+  .site-footer,
+  .no-print,
+  .btn,
+  .table-tools,
+  .pager,
+  .drawer-backdrop {
+    display: none !important;
+  }
+
+  .app {
+    display: block;
+  }
+
+  .view {
+    max-width: none;
+    padding: 0;
+  }
+
+  .panel,
+  .incident,
+  .figure {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+
+  .section {
+    margin-top: 18pt;
+  }
+
+  details.incident > .incident-body {
+    display: grid !important;
+  }
+
+  .table-wrap {
+    overflow: visible;
+  }
+
+  table.data thead th {
+    position: static;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.print-only {
+  display: none;
+}

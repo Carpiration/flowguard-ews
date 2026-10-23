@@ -1,0 +1,15 @@
+{
+  "name": "flowguard-ews",
+  "version": "2.0.0",
+  "private": true,
+  "description": "FlowGuard — модель раннего выявления рисков путём обнаружения аномалий сетевого трафика (статическое веб-приложение)",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node tests/run-node.mjs",
+    "start": "python scripts/serve.py",
+    "samples": "python scripts/make_samples.py"
+  }
+}
