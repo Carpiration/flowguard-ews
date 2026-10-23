@@ -709,6 +709,7 @@ h2[tabindex="-1"]:focus {
 
 .field {
   display: grid;
+  align-content: start;
   gap: 6px;
   min-width: 0;
 }
@@ -2411,6 +2412,11 @@ dialog.modal::backdrop {
 
 .status-strip .stat + .stat {
   border-left: 1px solid var(--line);
+}
+
+.status-strip .stat-value {
+  font-size: 24px;
+  white-space: nowrap;
 }
 
 /* ===== Методология ===== */

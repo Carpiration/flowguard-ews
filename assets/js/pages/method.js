@@ -4,6 +4,9 @@ import { LEVELS, PARAMS } from '../core/score.js';
 import { html, mount, qsa, raw } from '../ui/dom.js';
 import { fmt2 } from '../ui/format.js';
 
+// Число с десятичной запятой, без лишних нулей.
+const dec = (x) => String(x).replace('.', ',');
+
 const FEATURE_DESC = {
   pkts: 'Число пакетов (для потоков — сумма пакетов в записях) за окно',
   bytes: 'Суммарный объём трафика, байт',
@@ -126,14 +129,14 @@ export async function render(view) {
             <small>Если окно подозрительно (max z ≥ 3,5 или CUSUM превысил h), норма обучается в 10 раз медленнее: атака не «впитывается» в норму, но устойчивые изменения сети учитываются.</small></div>
           <div class="formula">zᵢ = (xᵢ − μᵢ) / max(σᵢ, σ_min),   σ_min = max(0,12; 1/√(λ + 1)),   λ = e^μ − 1
             <small>Нижняя граница σ соответствует пуассоновскому шуму счётчика: единичные события на «тихом» признаке не дают огромных z.</small></div>
-          <div class="formula">s_base = 1 − exp(−max(0, z_max − z₀) / 2,5),   z₀ = ${P.zOnset} / чувствительность</div>
+          <div class="formula">s_base = 1 − exp(−max(0, z_max − z₀) / 2,5),   z₀ = ${dec(P.zOnset)} / чувствительность</div>
         </section>
 
         <section id="cusum">
           <h2>Раннее предупреждение (CUSUM)</h2>
           <p>Медленно нарастающая атака (сканирование «по чуть-чуть», постепенная выгрузка данных) может долго не превышать порог в каждом отдельном окне.
           Кумулятивная сумма Пейджа накапливает небольшие устойчивые отклонения и сигнализирует раньше:</p>
-          <div class="formula">Sₜ = min(${fmt2(P.cusumCap)}·h, max(0, Sₜ₋₁ + clamp(zₜ, −3, 4) − k)),   k = ${P.cusumK},   h = ${P.cusumH} / чувствительность<br />s_cusum = max по признакам (Sₜ / h)
+          <div class="formula">Sₜ = min(${dec(P.cusumCap)}·h, max(0, Sₜ₋₁ + clamp(zₜ, −3, 4) − k)),   k = ${dec(P.cusumK)},   h = ${dec(P.cusumH)} / чувствительность<br />s_cusum = max по признакам (Sₜ / h)
             <small>CUSUM считается для 10 счётчиков (пакеты, объём, адресаты, порты, соединения, RST, ICMP, DNS, исходящий объём, новые пары). При s_cusum ≥ 0,5 модель переходит в состояние «предупреждение», даже если риск ещё ниже порога тревоги.</small></div>
         </section>
 
@@ -144,7 +147,7 @@ export async function render(view) {
           <div class="formula">s(x) = 2^(−E[h(x)] / c(ψ)),   c(n) = 2·(ln(n − 1) + 0,5772) − 2·(n − 1)/n</div>
           <p>Метод предполагает, что аномалий мало. Чтобы атаки не загрязняли обучение, лес обучается на «вероятно нормальных» окнах:
           предварительный проход без леса отбирает окна с риском ниже уровня предупреждения. Оценка нормируется робастно по этим же окнам
-          (<code>z_if = (s − медиана) / (1,4826·MAD)</code>), затем <code>s_if = clamp((z_if − ${P.ifOnset}) / ${P.ifRange}, 0, 1)</code>.
+          (<code>z_if = (s − медиана) / (1,4826·MAD)</code>), затем <code>s_if = clamp((z_if − ${dec(P.ifOnset)}) / ${dec(P.ifRange)}, 0, 1)</code>.
           В мониторинге лес переобучается каждые 90 окон.</p>
         </section>
 
@@ -161,9 +164,9 @@ export async function render(view) {
         <section id="fusion">
           <h2>Оценка риска</h2>
           <p>Статистические детекторы объединяются «шумовым ИЛИ» и нормируются к максимуму, сигнатуры — с весами важности:</p>
-          <div class="formula">A = [1 − (1 − ${P.wBase}·s_base)(1 − ${P.wCusum}·s_cusum)(1 − ${P.wIf}·s_if)] / A_max<br />
+          <div class="formula">A = [1 − (1 − ${dec(P.wBase)}·s_base)(1 − ${dec(P.wCusum)}·s_cusum)(1 − ${dec(P.wIf)}·s_if)] / A_max<br />
             P = 1 − ∏ (1 − v_важн · уверенность),   v = (${P.sevWeight.slice(1).map(fmt2).join('; ')})<br />
-            R_raw = 100 · (1 − (1 − P)·(1 − ${P.lambda}·A))<br />
+            R_raw = 100 · (1 − (1 − P)·(1 − ${dec(P.lambda)}·A))<br />
             Rₜ = max(R_raw, Rₜ₋₁ · 0,5^(w / ${P.halfLife}))
             <small>Сглаживание даёт быстрый рост и медленный спад риска (полураспад ${P.halfLife} с). Только статистика без сигнатур может дать до ${Math.round(P.lambda * 100)} баллов.</small></div>
           <div class="table-wrap"><table class="data"><thead><tr><th>Уровень</th><th>Диапазон</th><th>Состояние модели</th></tr></thead><tbody>

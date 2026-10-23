@@ -99,18 +99,20 @@ export class NetMap {
   layout() {
     if (!this.hosts) return;
     const cx = this.width / 2;
-    const cy = this.height / 2;
-    const R = Math.min(this.width / 2 - 30, this.height / 2 - 24);
-    const radii = [R * 0.22, R * 0.58, R * 0.95];
+    const cy = this.height / 2 - 6;
+    // Эллиптические кольца на всю площадь холста: серверы, рабочие станции, внешние узлы.
+    const RX = Math.max(60, this.width / 2 - 56);
+    const RY = Math.max(60, this.height / 2 - 34);
+    const frac = [0.3, 0.64, 0.97];
     const groups = [[], [], []];
     for (const n of this.nodes.values()) groups[this.ring(n.id)].push(n);
     groups.forEach((g, k) => {
       g.sort((a, b) => this.hosts.name(a.id).localeCompare(this.hosts.name(b.id), 'en', { numeric: true }));
       g.forEach((n, i) => {
         const a = (i / Math.max(1, g.length)) * Math.PI * 2 - Math.PI / 2 + k * 0.35;
-        const rx = radii[k] * (this.width > this.height ? Math.min(1.6, this.width / this.height) : 1);
-        n.tx = cx + Math.cos(a) * (k === 0 && g.length === 1 ? 0 : rx);
-        n.ty = cy + Math.sin(a) * radii[k];
+        const single = k === 0 && g.length === 1;
+        n.tx = cx + (single ? 0 : Math.cos(a) * RX * frac[k]);
+        n.ty = cy + (single ? 0 : Math.sin(a) * RY * frac[k]);
       });
     });
   }
