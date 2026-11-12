@@ -16,6 +16,16 @@ export const VARIANTS = [
   { id: 'patterns', name: 'Только поведенческие сигнатуры', components: { patterns: true } },
 ];
 
+// Абляция «ансамбль без одного детектора»: показывает, что теряется при отключении
+// каждого компонента. Считается только при options.loo, чтобы не замедлять интерфейс.
+export const LOO_VARIANTS = [
+  { id: 'no-ewma', name: 'Ансамбль без EWMA-z', components: { ...ALL_COMPONENTS, baseline: false } },
+  { id: 'no-cusum', name: 'Ансамбль без CUSUM', components: { ...ALL_COMPONENTS, cusum: false } },
+  { id: 'no-iforest', name: 'Ансамбль без Isolation Forest', components: { ...ALL_COMPONENTS, iforest: false } },
+  { id: 'no-patterns', name: 'Ансамбль без сигнатур', components: { ...ALL_COMPONENTS, patterns: false } },
+];
+
+const BASE_VARIANTS = VARIANTS;
 const NONE = { baseline: false, cusum: false, iforest: false, patterns: false };
 const BUFFER = 30;
 
@@ -42,7 +52,8 @@ function firstState(sc, prep, results, minState) {
 }
 
 export function runLab(options = {}, onProgress) {
-  const { seed = 42, duration = 1200, schedule = DEFAULT_SCHEDULE, sensitivity = 1, threshold = 50, runs = 1 } = options;
+  const { seed = 42, duration = 1200, schedule = DEFAULT_SCHEDULE, sensitivity = 1, threshold = 50, runs = 1, windowSize = 'auto', loo = false } = options;
+  const VARIANTS = loo ? [...BASE_VARIANTS, ...LOO_VARIANTS] : BASE_VARIANTS;
   const perRun = [];
   let first = null;
   for (let r = 0; r < runs; r++) {
@@ -50,7 +61,7 @@ export function runLab(options = {}, onProgress) {
     onProgress?.('generate', r / runs);
     const { trace, truth } = generateDataset({ seed: runSeed, duration, schedule });
     onProgress?.('features', (r + 0.3) / runs);
-    const prep = prepare(trace, { sensitivity });
+    const prep = prepare(trace, { sensitivity, windowSize });
     const forest = fitForest(prep, runSeed);
     onProgress?.('model', (r + 0.6) / runs);
     const labels = prep.windows.map((w) => (w.attack > 0 ? 1 : 0));
@@ -114,6 +125,20 @@ export function runLab(options = {}, onProgress) {
     };
   }
 
+  // Выигрыш раннего выявления: на сколько секунд ансамбль опережает порог μ+3σ.
+  // Пропуск базовым методом считается как задержка до конца атаки плюс буфер.
+  const leadTime = [];
+  for (const p of perRun) {
+    p.truth.forEach((sc, i) => {
+      const full = p.variants.full.delays[i];
+      if (full === null) return;
+      const st = p.variants.static.delays[i];
+      leadTime.push((st === null ? sc.t1 - sc.t0 + BUFFER : st) - full);
+    });
+  }
+  const earlier = leadTime.filter((x) => x > 0).length;
+  const early = { mean: mean(leadTime), sd: sd(leadTime), share: leadTime.length ? earlier / leadTime.length : null, n: leadTime.length };
+
   const run0 = perRun[0];
   const scenarios = run0.truth.map((sc, i) => ({
     type: sc.type,
@@ -135,6 +160,7 @@ export function runLab(options = {}, onProgress) {
     params: { seed, duration, sensitivity, threshold, runs, buffer: BUFFER, windowSize: first.prep.w, schedule },
     variants: VARIANTS.map(({ id, name }) => ({ id, name })),
     summary,
+    early,
     scenarios,
     runs: perRun.map((p) => ({ seed: p.seed, f1: p.variants.full.metrics.f1, auc: p.variants.full.auc, staticF1: p.variants.static.metrics.f1, staticAuc: p.variants.static.auc })),
     first: {

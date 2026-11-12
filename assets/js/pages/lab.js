@@ -186,7 +186,7 @@ export async function render(view, _params, ctx) {
             <div class="stat"><span class="stat-label">Ложных тревог в час</span><span class="stat-value">${fmt1(S.full.falsePerHour.mean)}</span><span class="stat-sub">${delta(S.full.falsePerHour.mean, S.static.falsePerHour.mean, 'lower', fmt1)}</span></div>
           </div>
           <div class="panel-foot">${multi ? `Среднее ± стандартное отклонение по ${res.params.runs} прогонам (seed ${res.runs.map((r) => r.seed).join(', ')}).` : `Один прогон, seed ${res.params.seed}.`}
-            Окно ${res.params.windowSize} с; ${res.params.buffer} с после каждой атаки исключены из оценки по окнам.</div>
+            Окно ${res.params.windowSize} с; ${res.params.buffer} с после каждой атаки исключены из оценки по окнам.${res.early?.mean != null ? ` Раннее выявление: ансамбль опережает порог μ+3σ в среднем на ${fmtDuration(res.early.mean)}, раньше в ${fmtPct(res.early.share)} сценариев.` : ''}</div>
         </div>
 
         <div class="grid cols-2" style="margin-top:16px">

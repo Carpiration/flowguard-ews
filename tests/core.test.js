@@ -7,6 +7,7 @@ import { parseFlags, parseTime } from '../assets/js/core/parse-text.js';
 import { writePcap } from '../assets/js/core/pcap-writer.js';
 import { Rng } from '../assets/js/core/prng.js';
 import { ScoreEngine } from '../assets/js/core/score.js';
+import { runLab } from '../assets/js/core/lab.js';
 import { generateDataset } from '../assets/js/core/simulate.js';
 import { PROTO, TCPF, TraceBuilder } from '../assets/js/core/trace.js';
 import { assert, equal, near, rejects, setFile, test } from './harness.js';
@@ -247,4 +248,12 @@ test('сквозной сценарий: синтетический набор �
   assert(report.evaluation, 'есть оценка по разметке');
   assert(report.evaluation.auc > 0.85, `AUC ${report.evaluation.auc}`);
   assert(report.evaluation.recall > 0.6, `полнота ${report.evaluation.recall}`);
+});
+
+test('эксперимент: абляция «без одного детектора» и выигрыш раннего выявления', () => {
+  const lab = runLab({ seed: 42, duration: 1200, runs: 1, loo: true });
+  equal(lab.variants.length, 10);
+  assert(lab.summary['no-patterns'].f1.mean < lab.summary.full.f1.mean, 'без сигнатур качество ниже');
+  assert(lab.early.n === 7 && lab.early.share >= 0.7, `доля сценариев с опережением ${lab.early.share}`);
+  assert(lab.early.mean > 30, `среднее опережение ${lab.early.mean} с`);
 });
