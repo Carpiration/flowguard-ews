@@ -1,0 +1,37 @@
+up6079|Указ Президента Республики Узбекистан от 05.10.2020 № УП-6079 «Об утверждении Стратегии «Цифровой Узбекистан – 2030» и мерах по ее эффективной реализации».
+zru764|Закон Республики Узбекистан от 15.04.2022 № ЗРУ-764 «О кибербезопасности».
+olifer|Олифер В.Г., Олифер Н.А. Компьютерные сети. Принципы, технологии, протоколы. 5-е изд. СПб.: Питер, 2016.
+tanenbaum|Таненбаум Э., Уэзеролл Д. Компьютерные сети. 5-е изд. СПб.: Питер, 2012.
+shangin|Шаньгин В.Ф. Информационная безопасность и защита информации. М.: ДМК Пресс, 2014.
+denning|Denning D.E. An Intrusion-Detection Model // IEEE Transactions on Software Engineering. 1987. Vol. SE-13, No. 2. P. 222–232.
+chandola|Chandola V., Banerjee A., Kumar V. Anomaly Detection: A Survey // ACM Computing Surveys. 2009. Vol. 41, No. 3. Article 15.
+garcia|García-Teodoro P., Díaz-Verdejo J., Maciá-Fernández G., Vázquez E. Anomaly-based network intrusion detection: Techniques, systems and challenges // Computers & Security. 2009. Vol. 28, No. 1–2. P. 18–28.
+bhuyan|Bhuyan M.H., Bhattacharyya D.K., Kalita J.K. Network Anomaly Detection: Methods, Systems and Tools // IEEE Communications Surveys & Tutorials. 2014. Vol. 16, No. 1. P. 303–336.
+sommer|Sommer R., Paxson V. Outside the Closed World: On Using Machine Learning for Network Intrusion Detection // IEEE Symposium on Security and Privacy. 2010. P. 305–316.
+mirkovic|Mirkovic J., Reiher P. A Taxonomy of DDoS Attack and DDoS Defense Mechanisms // ACM SIGCOMM Computer Communication Review. 2004. Vol. 34, No. 2. P. 39–53.
+page|Page E.S. Continuous Inspection Schemes // Biometrika. 1954. Vol. 41, No. 1/2. P. 100–115.
+roberts|Roberts S.W. Control Chart Tests Based on Geometric Moving Averages // Technometrics. 1959. Vol. 1, No. 3. P. 239–250.
+shannon|Shannon C.E. A Mathematical Theory of Communication // Bell System Technical Journal. 1948. Vol. 27. P. 379–423, 623–656.
+liu|Liu F.T., Ting K.M., Zhou Z.-H. Isolation Forest // Proceedings of the 8th IEEE International Conference on Data Mining (ICDM). 2008. P. 413–422.
+fawcett|Fawcett T. An introduction to ROC analysis // Pattern Recognition Letters. 2006. Vol. 27, No. 8. P. 861–874.
+roesch|Roesch M. Snort – Lightweight Intrusion Detection for Networks // Proceedings of the 13th USENIX Conference on System Administration (LISA). 1999. P. 229–238.
+paxson|Paxson V. Bro: A System for Detecting Network Intruders in Real-Time // Computer Networks. 1999. Vol. 31, No. 23–24. P. 2435–2463.
+cicids|Sharafaldin I., Lashkari A.H., Ghorbani A.A. Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization // Proceedings of the 4th International Conference on Information Systems Security and Privacy (ICISSP). 2018. P. 108–116.
+unsw|Moustafa N., Slay J. UNSW-NB15: A comprehensive data set for network intrusion detection systems // Military Communications and Information Systems Conference (MilCIS). 2015. P. 1–6.
+iot23|Garcia S., Parmisano A., Erquiaga M.J. IoT-23: A labeled dataset with malicious and benign IoT network traffic (Version 1.0.0). Zenodo, 2020. DOI: 10.5281/zenodo.4743746.
+suricata|Suricata User Guide. Open Information Security Foundation. URL: https://docs.suricata.io (дата обращения: 12.11.2026).
+zeek|Zeek Documentation. The Zeek Project. URL: https://docs.zeek.org (дата обращения: 12.11.2026).
+mitre|MITRE ATT&CK: Enterprise Matrix. The MITRE Corporation. URL: https://attack.mitre.org (дата обращения: 12.11.2026).
+iot23site|Stratosphere Laboratory. Aposemat IoT-23: A labeled dataset with malicious and benign IoT network traffic. URL: https://www.stratosphereips.org/datasets-iot23 (дата обращения: 12.11.2026).
+flowguard|FlowGuard: исходный код модели раннего выявления рисков. URL: https://github.com/Carpiration/flowguard-ews (дата обращения: 12.11.2026).
+zru410|Закон Республики Узбекистан «Об охране труда» (новая редакция) от 22.09.2016 № ЗРУ-410.
+zru226|Закон Республики Узбекистан от 30.09.2009 № ЗРУ-226 «О пожарной безопасности».
+gost003|ГОСТ 12.0.003-2015. Система стандартов безопасности труда. Опасные и вредные производственные факторы. Классификация.
+gost032|ГОСТ 12.2.032-78. Система стандартов безопасности труда. Рабочее место при выполнении работ сидя. Общие эргономические требования.
+gost030|ГОСТ 12.1.030-81. Система стандартов безопасности труда. Электробезопасность. Защитное заземление, зануление.
+gost004|ГОСТ 12.1.004-91. Система стандартов безопасности труда. Пожарная безопасность. Общие требования.
+gost27331|ГОСТ 27331-87. Пожарная техника. Классификация пожаров.
+rfc793|Postel J. Transmission Control Protocol. RFC 793. IETF, 1981. URL: https://www.rfc-editor.org/rfc/rfc793.html (дата обращения: 12.11.2026).
+rfc1035|Mockapetris P. Domain Names – Implementation and Specification. RFC 1035. IETF, 1987. URL: https://www.rfc-editor.org/rfc/rfc1035.html (дата обращения: 12.11.2026).
+rfc1918|Rekhter Y., Moskowitz B., Karrenberg D., de Groot G.J., Lear E. Address Allocation for Private Internets. RFC 1918. IETF, 1996. URL: https://www.rfc-editor.org/rfc/rfc1918.html (дата обращения: 12.11.2026).
+rfc5737|Arkko J., Cotton M., Vegoda L. IPv4 Address Blocks Reserved for Documentation. RFC 5737. IETF, 2010. URL: https://www.rfc-editor.org/rfc/rfc5737.html (дата обращения: 12.11.2026).
